@@ -11,7 +11,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import { green } from "@material-ui/core/colors";
+
 import { makeStyles } from "@material-ui/core";
 
 import {data} from "../data/quiz";
@@ -84,7 +84,6 @@ const mainMenu = (props) => {
       style={{
         paddingTop: "5vh",
         height: "100vh",
-        backgroundColor: green[50],
         textAlign: "center",
       }}
     >

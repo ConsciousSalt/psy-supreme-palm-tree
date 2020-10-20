@@ -5,6 +5,7 @@ import TestList from "../TestList/TestList";
 import TestSingle from "../TestSingle/TestSingle";
 
 import Container from "@material-ui/core/Container";
+import { green } from "@material-ui/core/colors";
 
 const main = (props) => {
   let routes = (
@@ -14,7 +15,7 @@ const main = (props) => {
     </Switch>
   );
 
-  return <Container maxWidth="lg">{routes}</Container>;
+  return <Container maxWidth="lg" style={{backgroundColor: green[50]}}>{routes}</Container>;
 };
 
 export default main;
