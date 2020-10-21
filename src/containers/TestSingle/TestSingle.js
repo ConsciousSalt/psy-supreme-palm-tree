@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 
-import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 
@@ -11,45 +10,6 @@ import Stepper from "../../components/Stepper/Stepper";
 
 import { findById } from "../data/quiz";
 
-// const TestSingle = (props) => {
-// const [quiz, setQuiz] = useState({});
-
-// const useStyles = makeStyles({
-//   root: {
-//     maxWidth: 400,
-//     flexGrow: 1,
-//   },
-// });
-// const classes = useStyles();
-// const theme = useTheme();
-//   const [activeStep, setActiveStep] = useState(0);
-//   setQuiz(findById(props.match.params.id));
-
-//   const handleNext = () => {
-//     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-//   };
-
-//   const handleBack = () => {
-//     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-//   };
-
-//   return (
-//     <Fragment>
-//     <Paper
-//       style={{ paddingTop: "5vh", height: "100vh", backgroundColor: green[50] }}
-//       elevation={3}
-//     >
-//       <Typography component="div" gutterBottom align="center" variant="h3">
-//         {quiz.name}
-//       </Typography>
-//       <Typography  display = "block" align="left" gutterBottom variant="body1">
-//         {quiz.name}
-//       </Typography>
-//     </Paper>
-//        </Fragment>
-//   );
-// };
-
 const TestSingle = (props) => {
   const quiz = findById(props.match.params.id);
   const totalQuestions = quiz.questions.length;
@@ -57,27 +17,26 @@ const TestSingle = (props) => {
   const [activeStep, setActiveStep] = useState(0);
   const [answers, setAnswer] = useState({});
   const [nextButtonDisabled, setNextButtonDisabled] = useState(false);  
+
+  useEffect(() => {
+    function getNextButtonEnabled() {
+      let buttonEnabled = true;
+      if (activeStep === totalQuestions-1){
+        if (!answers[activeStep]){
+          buttonEnabled = false;
+        }else{
+          buttonEnabled = true;
+        }  
+      }
+  
+      return buttonEnabled;
+    }
+
+    setNextButtonDisabled(!getNextButtonEnabled());
+  }, [activeStep, answers])
   
   //event handlers
   //Stepper
-  function getNextButtonEnabled() {
-    let buttonEnabled = true;
-    if (activeStep === totalQuestions-1){
-      if (!answers[activeStep]){
-        buttonEnabled = false;
-      }else{
-        buttonEnabled = true;
-      }  
-    }
-
-    return buttonEnabled;
-  }
-
-  useEffect(() => {
-    console.log(props);
-    setNextButtonDisabled(!getNextButtonEnabled());
-  }, [activeStep, answers])
-
   const handleNext = () => {
     if (activeStep < totalQuestions-1) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
